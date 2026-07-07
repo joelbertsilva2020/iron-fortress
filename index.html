@@ -1,0 +1,309 @@
+﻿<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<title>IRON FORTRESS - Missão 20.100</title>
+
+<style>
+html,body{
+    margin:0;
+    padding:0;
+    background:#000;
+    overflow-x:hidden;
+    font-family:Consolas,monospace;
+    color:#00ff66;
+}
+
+canvas{
+    position:fixed;
+    top:0;
+    left:0;
+    z-index:-1;
+}
+
+.container{
+    width:95%;
+    max-width:1100px;
+    margin:auto;
+    padding:20px;
+}
+
+h1{
+    text-align:center;
+    letter-spacing:3px;
+}
+
+.info{
+    background:rgba(0,0,0,.7);
+    border:1px solid #00ff66;
+    padding:15px;
+    border-radius:8px;
+    margin-bottom:20px;
+}
+
+.progress{
+    width:100%;
+    height:28px;
+    background:#111;
+    border:1px solid #00ff66;
+    border-radius:25px;
+    overflow:hidden;
+    margin-top:15px;
+}
+
+.progress-fill{
+    width:0%;
+    height:100%;
+    background:linear-gradient(90deg,#00bfff,#00ff66);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    color:#000;
+    font-weight:bold;
+    transition:.4s;
+}
+
+.grid{
+    display:grid;
+    grid-template-columns:repeat(10,60px);
+    justify-content:center;
+    gap:12px;
+    margin-top:20px;
+}
+
+}
+
+.item{
+
+    width:55px;
+    height:55px;
+
+    border-radius:50%;
+
+    border:2px solid #00ff66;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    cursor:pointer;
+
+    background:rgba(0,0,0,.55);
+
+    transition:.25s;
+
+    font-weight:bold;
+
+}
+
+.item{
+    width:60px;
+    height:60px;
+    border-radius:50%;
+    border:2px solid #00ff66;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:rgba(0,0,0,.6);
+    cursor:pointer;
+    transition:.25s;
+    font-weight:bold;
+    color:#00ff66;
+    box-sizing:border-box;
+}
+
+.item:hover{
+
+    transform:scale(1.12);
+
+    box-shadow:0 0 15px #00ff66;
+
+}
+
+.pago{
+
+    background:linear-gradient(135deg,#00bfff,#00ff66);
+
+    color:#000;
+
+    border:none;
+
+    box-shadow:0 0 15px #00ff66;
+
+}
+
+button{
+    margin-top:20px;
+    padding:10px 20px;
+    background:#111;
+    color:#00ff66;
+    border:1px solid #00ff66;
+    cursor:pointer;
+}
+</style>
+
+</head>
+
+<body>
+
+<canvas id="matrix"></canvas>
+
+<div class="container">
+
+<h1>IRON FORTRESS</h1>
+
+<div class="info">
+
+<h2>MISSÃO R$ 20.100</h2>
+
+<p id="missoes"></p>
+
+<p id="valor"></p>
+
+<p id="faltam"></p>
+
+<div class="progress">
+    <div class="progress-fill" id="progressFill">
+        <span id="percentual">0%</span>
+    </div>
+</div>
+
+</div>
+
+<div class="grid" id="grid"></div>
+
+<button onclick="resetar()">Resetar Missão</button>
+
+</div>
+
+<script>
+
+let pagos = JSON.parse(localStorage.getItem("ironfortress")) || [];
+
+const grid=document.getElementById("grid");
+
+for(let i=1;i<=200;i++){
+
+let d=document.createElement("div");
+
+d.className="item";
+
+if(pagos.includes(i)) d.classList.add("pago");
+
+d.innerHTML=i;
+
+d.onclick=()=>{
+
+if(pagos.includes(i)){
+
+pagos=pagos.filter(x=>x!=i);
+
+d.classList.remove("pago");
+
+}else{
+
+pagos.push(i);
+
+d.classList.add("pago");
+
+}
+
+localStorage.setItem("ironfortress",JSON.stringify(pagos));
+
+atualizar();
+
+}
+
+grid.appendChild(d);
+
+}
+
+function atualizar(){
+
+let total=pagos.reduce((a,b)=>a+b,0);
+
+document.getElementById("valor").innerHTML="💰 Acumulado: R$ "+total.toLocaleString('pt-BR');
+
+document.getElementById("faltam").innerHTML="🎯 Faltam: R$ "+(20100-total).toLocaleString('pt-BR');
+
+document.getElementById("missoes").innerHTML="✅ Missões: "+pagos.length+"/200";
+
+let percentual=((total/20100)*100).toFixed(1);
+
+document.getElementById("progressFill").style.width=percentual+"%";
+
+document.getElementById("percentual").innerHTML=percentual+"%";
+
+}
+
+function resetar(){
+
+if(confirm("Apagar todo o progresso?")){
+
+localStorage.removeItem("ironfortress");
+
+location.reload();
+
+}
+
+}
+
+atualizar();
+
+
+// MATRIX
+
+const canvas=document.getElementById("matrix");
+
+const ctx=canvas.getContext("2d");
+
+canvas.width=window.innerWidth;
+
+canvas.height=window.innerHeight;
+
+const letters="アイウエオカキクケコ0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+
+const font=14;
+
+const columns=canvas.width/font;
+
+const drops=[];
+
+for(let i=0;i<columns;i++) drops[i]=1;
+
+function draw(){
+
+ctx.fillStyle="rgba(0,0,0,.05)";
+
+ctx.fillRect(0,0,canvas.width,canvas.height);
+
+ctx.fillStyle="#00ff66";
+
+ctx.font=font+"px monospace";
+
+for(let i=0;i<drops.length;i++){
+
+let text=letters[Math.floor(Math.random()*letters.length)];
+
+ctx.fillText(text,i*font,drops[i]*font);
+
+if(drops[i]*font>canvas.height && Math.random()>0.975){
+
+drops[i]=0;
+
+}
+
+drops[i]++;
+
+}
+
+}
+
+setInterval(draw,45);
+
+</script>
+
+</body>
+</html>
