@@ -64,11 +64,19 @@ h1{
 }
 
 .grid{
+
     display:grid;
-    grid-template-columns:repeat(10,60px);
-    justify-content:center;
-    gap:12px;
-    margin-top:20px;
+
+    grid-template-columns:repeat(auto-fit,minmax(70px,1fr));
+
+    gap:14px;
+
+    justify-items:center;
+
+    max-width:900px;
+
+    margin:20px auto;
+
 }
 
 }
@@ -141,7 +149,37 @@ button{
     color:#00ff66;
     border:1px solid #00ff66;
     cursor:pointer;
+} 
+
+/* RESPONSIVO */
+
+@media (max-width:768px){
+
+.grid{
+
+grid-template-columns:repeat(5,1fr);
+
+gap:18px;
+
 }
+
+.item{
+
+width:70px;
+
+height:70px;
+
+font-size:20px;
+
+}
+
+.info{
+
+margin:10px;
+
+}
+
+}    
 </style>
 
 </head>
