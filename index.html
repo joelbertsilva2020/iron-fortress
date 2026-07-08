@@ -21,6 +21,127 @@ canvas{
     z-index:-1;
 }
 
+/* ===========================
+   HEADER
+=========================== */
+
+.header{
+
+display:flex;
+
+justify-content:space-between;
+
+align-items:center;
+
+padding-bottom:18px;
+
+margin-bottom:20px;
+
+border-bottom:1px solid rgba(0,255,102,.25);
+
+}
+
+.brand{
+
+display:flex;
+
+align-items:center;
+
+gap:15px;
+
+}
+
+.brand-logo{
+
+width:52px;
+
+height:52px;
+
+border-radius:50%;
+
+border:2px solid #00ff66;
+
+display:flex;
+
+justify-content:center;
+
+align-items:center;
+
+font-weight:bold;
+
+font-size:18px;
+
+color:#00ff66;
+
+box-shadow:0 0 15px rgba(0,255,102,.35);
+
+background:rgba(0,0,0,.45);
+
+}
+
+.brand-title{
+
+font-size:28px;
+
+font-weight:bold;
+
+letter-spacing:2px;
+
+}
+
+.brand-subtitle{
+
+font-size:13px;
+
+color:#8effc8;
+
+letter-spacing:1px;
+
+margin-top:3px;
+
+}
+
+.system-status{
+
+display:flex;
+
+align-items:center;
+
+gap:10px;
+
+font-size:13px;
+
+font-weight:bold;
+
+color:#8effc8;
+
+}
+
+.status-led{
+
+width:10px;
+
+height:10px;
+
+border-radius:50%;
+
+background:#00ff66;
+
+box-shadow:0 0 12px #00ff66;
+
+animation:pulse 1.5s infinite;
+
+}
+
+@keyframes pulse{
+
+0%{opacity:1;}
+
+50%{opacity:.35;}
+
+100%{opacity:1;}
+
+}
 .container{
     width:95%;
     max-width:1100px;
@@ -28,40 +149,37 @@ canvas{
     padding:20px;
 }
 
-<div class="hud-header">
+<div class="header">
 
-    <div class="hud-left">
+    <div class="brand">
 
-        <div class="logo">🛡</div>
+        <div class="brand-logo">
+            IF
+        </div>
 
-        <div>
+        <div class="brand-info">
 
-            <h1 id="titulo">IRON FORTRESS</h1>
+            <div class="brand-title">
+                IRON FORTRESS
+            </div>
 
-            <div class="subtitulo">
-    Financial Command Center
-</div>
+            <div class="brand-subtitle">
+                Financial Command Center
+            </div>
 
         </div>
 
     </div>
 
-    <div class="hud-status">
+    <div class="system-status">
 
-    <div class="status-group">
-        <span class="status-dot"></span>
-        <span class="status-text">ONLINE</span>
+        <span class="status-led"></span>
+
+        <span>ONLINE</span>
+
     </div>
 
-    <span id="toggleValores" class="eye-button" title="Mostrar/Ocultar valores">
-        👁️
-    </span>
-
 </div>
-
-</div>
-
-<hr class="hud-line">
 
 .info{
 
