@@ -1,8 +1,9 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="pt-br">
 <head>
 <meta charset="UTF-8">
 <title>IRON FORTRESS - Missão 20.100</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
 <style>
 html,body{
@@ -22,132 +23,311 @@ canvas{
 }
 
 /* ===========================
-   HEADER
+   CONTAINER
 =========================== */
 
-.header{
-
-display:flex;
-
-justify-content:space-between;
-
-align-items:center;
-
-padding-bottom:18px;
-
-margin-bottom:20px;
-
-border-bottom:1px solid rgba(0,255,102,.25);
-
-}
-
-.brand{
-
-display:flex;
-
-align-items:center;
-
-gap:15px;
-
-}
-
-.brand-logo{
-
-width:52px;
-
-height:52px;
-
-border-radius:50%;
-
-border:2px solid #00ff66;
-
-display:flex;
-
-justify-content:center;
-
-align-items:center;
-
-font-weight:bold;
-
-font-size:18px;
-
-color:#00ff66;
-
-box-shadow:0 0 15px rgba(0,255,102,.35);
-
-background:rgba(0,0,0,.45);
-
-}
-
-.brand-title{
-
-font-size:28px;
-
-font-weight:bold;
-
-letter-spacing:2px;
-
-}
-
-.brand-subtitle{
-
-font-size:13px;
-
-color:#8effc8;
-
-letter-spacing:1px;
-
-margin-top:3px;
-
-}
-
-.system-status{
-
-display:flex;
-
-align-items:center;
-
-gap:10px;
-
-font-size:13px;
-
-font-weight:bold;
-
-color:#8effc8;
-
-}
-
-.status-led{
-
-width:10px;
-
-height:10px;
-
-border-radius:50%;
-
-background:#00ff66;
-
-box-shadow:0 0 12px #00ff66;
-
-animation:pulse 1.5s infinite;
-
-}
-
-@keyframes pulse{
-
-0%{opacity:1;}
-
-50%{opacity:.35;}
-
-100%{opacity:1;}
-
-}
 .container{
     width:95%;
     max-width:1100px;
     margin:auto;
     padding:20px;
+	position:relative;
 }
+
+/* ===========================
+   HEADER
+=========================== */
+
+.header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding-bottom:18px;
+    margin-bottom:25px;
+    border-bottom:1px solid rgba(0,255,102,.25);
+}
+
+.brand{
+    display:flex;
+    align-items:center;
+    gap:15px;
+}
+
+.brand-logo{
+    width:54px;
+    height:54px;
+    border-radius:50%;
+    border:2px solid #00ff66;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-weight:bold;
+    font-size:20px;
+    color:#00ff66;
+    background:rgba(0,0,0,.45);
+    box-shadow:0 0 15px rgba(0,255,102,.35);
+}
+
+.brand-title{
+    font-size:30px;
+    font-weight:bold;
+    letter-spacing:2px;
+}
+
+.brand-subtitle{
+    font-size:13px;
+    color:#8effc8;
+    letter-spacing:1px;
+    margin-top:4px;
+}
+
+.system-status{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    font-size:13px;
+    font-weight:bold;
+    color:#8effc8;
+}
+
+.status-led{
+    width:10px;
+    height:10px;
+    border-radius:50%;
+    background:#00ff66;
+    box-shadow:0 0 12px #00ff66;
+    animation:pulse 1.5s infinite;
+}
+
+@keyframes pulse{
+    0%{opacity:1;}
+    50%{opacity:.35;}
+    100%{opacity:1;}
+}
+
+/* ===========================
+   DASHBOARD
+=========================== */
+
+.info{
+    background:rgba(0,0,0,.55);
+    backdrop-filter:blur(12px);
+    border:1px solid rgba(0,255,120,.4);
+    padding:20px;
+    border-radius:12px;
+    margin-bottom:20px;
+    box-shadow:0 0 20px rgba(0,255,120,.2);
+}
+
+/* ===========================
+   DASHBOARD PREMIUM
+=========================== */
+
+.dashboard{
+
+display:flex;
+
+flex-direction:column;
+
+gap:15px;
+
+margin-bottom:20px;
+
+}
+
+.card-large{
+
+padding:22px;
+
+}
+
+.card-row{
+
+display:grid;
+
+grid-template-columns:1fr 1fr;
+
+gap:15px;
+
+}
+
+.card{
+
+background:rgba(255,255,255,.04);
+
+border:1px solid rgba(0,255,120,.15);
+
+border-radius:14px;
+
+padding:18px;
+
+transition:.25s ease;
+
+}
+
+.card:hover{
+
+transform:translateY(-2px);
+
+box-shadow:0 0 20px rgba(0,255,120,.18);
+
+}
+
+.card-title{
+
+font-size:12px;
+
+text-transform:uppercase;
+
+letter-spacing:2px;
+
+color:#8effc8;
+
+}
+
+.card-value{
+
+margin-top:8px;
+
+font-size:28px;
+
+font-weight:bold;
+
+color:white;
+
+}
+
+/* ===========================
+   PROGRESS
+=========================== */
+
+.progress{
+    width:100%;
+    height:36px;
+    background:#111;
+    border:1px solid #00ff66;
+    border-radius:10px;
+    overflow:hidden;
+    margin-top:10px;
+    box-shadow:
+        0 0 4px #00ff66,
+        0 0 10px #00bfff;
+}
+
+.progress-fill{
+
+    height:100%;
+
+    width:0%;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    position:relative;
+
+    overflow:hidden;
+
+    transition:width .5s ease;
+
+}
+
+
+
+/* ===========================
+   GRID
+=========================== */
+
+.grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(70px,1fr));
+    gap:14px;
+    justify-items:center;
+    max-width:900px;
+    margin:20px auto;
+}
+
+.item{
+    width:60px;
+    height:60px;
+    border-radius:50%;
+    border:2px solid #00ff66;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:rgba(0,0,0,.6);
+    cursor:pointer;
+    transition:.25s ease;
+    font-weight:bold;
+    color:#00ff66;
+    box-sizing:border-box;
+}
+
+.item:hover{
+    transform:scale(1.12);
+    box-shadow:0 0 15px #00ff66;
+}
+
+.pago{
+    background:linear-gradient(135deg,#00bfff,#00ff66);
+    color:#000;
+    border:none;
+    box-shadow:0 0 15px #00ff66;
+}
+
+button{
+    margin-top:20px;
+    padding:10px 20px;
+    background:#111;
+    color:#00ff66;
+    border:1px solid #00ff66;
+    cursor:pointer;
+}
+
+/* ===========================
+   RESPONSIVO
+=========================== */
+
+@media (max-width:768px){
+
+    .grid{
+        grid-template-columns:repeat(5,1fr);
+        gap:18px;
+    }
+
+    .item{
+        width:70px;
+        height:70px;
+        font-size:20px;
+    }
+
+    .info{
+        margin:10px;
+    }
+	
+	.dashboard{
+
+    grid-template-columns:1fr;
+
+}
+
+.card-row{
+
+grid-template-columns:1fr;
+
+}
+
+}
+</style>
+</head>
+
+<body>
+
+<canvas id="matrix"></canvas>
+
+<div class="container">
 
 <div class="header">
 
@@ -157,7 +337,7 @@ animation:pulse 1.5s infinite;
             IF
         </div>
 
-        <div class="brand-info">
+        <div>
 
             <div class="brand-title">
                 IRON FORTRESS
@@ -181,191 +361,60 @@ animation:pulse 1.5s infinite;
 
 </div>
 
-.info{
-
-background:rgba(0,0,0,.55);
-
-backdrop-filter:blur(12px);
-
-border:1px solid rgba(0,255,120,.4);
-
-padding:20px;
-
-border-radius:12px;
-
-margin-bottom:30px;
-
-box-shadow:
-
-0 0 20px rgba(0,255,120,.2);
-
-}
-
-.progress{
-    width:100%;
-    height:36px;
-    background:#111;
-    border:1px solid #00ff66;
-    border-radius:25px;
-    overflow:hidden;
-    margin-top:15px;
-    box-shadow:
-
-0 0 10px #00ff66,
-
-0 0 25px #00bfff;
-}
-
-.progress-fill{
-    width:0%;
-    height:100%;
-    background:linear-gradient(90deg,#00bfff,#00ff66);
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    color:#000;
-    font-weight:bold;
-    transition:.4s;
-}
-
-.grid{
-
-    display:grid;
-
-    grid-template-columns:repeat(auto-fit,minmax(70px,1fr));
-
-    gap:14px;
-
-    justify-items:center;
-
-    max-width:900px;
-
-    margin:20px auto;
-
-}
-
-}
-
-.item{
-
-    width:55px;
-    height:55px;
-
-    border-radius:50%;
-
-    border:2px solid #00ff66;
-
-    display:flex;
-
-    justify-content:center;
-
-    align-items:center;
-
-    cursor:pointer;
-
-    background:rgba(0,0,0,.55);
-
-    transition:.25s;
-
-    font-weight:bold;
-
-}
-
-.item{
-    width:60px;
-    height:60px;
-    border-radius:50%;
-    border:2px solid #00ff66;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    background:rgba(0,0,0,.6);
-    cursor:pointer;
-    transition:.25s;
-    font-weight:bold;
-    color:#00ff66;
-    box-sizing:border-box;
-}
-
-.item:hover{
-
-    transform:scale(1.12);
-
-    box-shadow:0 0 15px #00ff66;
-
-}
-
-.pago{
-
-    background:linear-gradient(135deg,#00bfff,#00ff66);
-
-    color:#000;
-
-    border:none;
-
-    box-shadow:0 0 15px #00ff66;
-
-}
-
-button{
-    margin-top:20px;
-    padding:10px 20px;
-    background:#111;
-    color:#00ff66;
-    border:1px solid #00ff66;
-    cursor:pointer;
-} 
-
-/* RESPONSIVO */
-
-@media (max-width:768px){
-
-.grid{
-
-grid-template-columns:repeat(5,1fr);
-
-gap:18px;
-
-}
-
-.item{
-
-width:70px;
-
-height:70px;
-
-font-size:20px;
-
-}
-
-.info{
-
-margin:10px;
-
-}
-
-}    
-</style>
-
-</head>
-
-<body>
-
-<canvas id="matrix"></canvas>
-
-<div class="container">
-
-<h1>IRON FORTRESS</h1>
-
 <div class="info">
 
-<h2>MISSÃO R$ 20.100</h2>
+<div class="dashboard">
 
-<p id="missoes"></p>
+    <div class="card card-large">
 
-<p id="valor"></p>
+        <div class="card-title">
+            SALDO ATUAL
+        </div>
 
-<p id="faltam"></p>
+        <div class="card-value" id="valor">
+        </div>
+
+    </div>
+
+    <div class="card card-large">
+
+        <div class="card-title">
+            META FINAL
+        </div>
+
+        <div class="card-value">
+            R$ 20.100
+        </div>
+
+    </div>
+
+    <div class="card-row">
+
+        <div class="card">
+
+            <div class="card-title">
+                MISSÕES
+            </div>
+
+            <div class="card-value" id="missoes">
+            </div>
+
+        </div>
+
+        <div class="card">
+
+            <div class="card-title">
+                FALTAM
+            </div>
+
+            <div class="card-value" id="faltam">
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
 
 <div class="progress">
     <div class="progress-fill" id="progressFill">
