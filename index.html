@@ -109,14 +109,46 @@ canvas{
    DASHBOARD
 =========================== */
 
-.info{
-    background:rgba(0,0,0,.75);
-    backdrop-filter:blur(6px);
-    border:1px solid rgba(0,255,120,.4);
-    padding:20px;
-    border-radius:12px;
-    margin-bottom:20px;
-    box-shadow:0 0 20px rgba(0,255,120,.2);
+.dashboard{
+
+display:grid;
+
+grid-template-columns:repeat(3,1fr);
+
+gap:15px;
+
+margin:20px 0;
+
+}
+
+.card{
+
+background:rgba(0,0,0,.55);
+
+border:1px solid #00ff66;
+
+padding:15px;
+
+border-radius:12px;
+
+text-align:center;
+
+}
+
+.card small{
+
+color:#00ff66;
+
+opacity:.7;
+
+}
+
+.card h3{
+
+margin-top:10px;
+
+font-size:20px;
+
 }
 
 /* ===========================
@@ -284,7 +316,13 @@ button{
 
 @media (max-width:768px){
 
-    .grid{
+   .dashboard{
+
+grid-template-columns:1fr;
+
+}
+
+	.grid{
         grid-template-columns:repeat(5,1fr);
         gap:18px;
     }
